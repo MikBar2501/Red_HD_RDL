@@ -19,11 +19,16 @@ public class UI : MonoBehaviour
     public Texture2D dangerOff;
     public Texture2D dangerOn;
 
+    public GameObject ShowWindow;
+    public RawImage ShowImageSpot;
+    public Text Description;
+
     public PlayerRadiationSettings player;
     bool inZone;
 
     void Awake()
     {
+        CloseImage();
         _UI = this;
         SetXToJason(false);
     }
@@ -53,6 +58,12 @@ public class UI : MonoBehaviour
             else
                 SignalSafety();
         }
+
+        if(isDisplayingImage())
+        {
+            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+                CloseImage();
+        }
     }
 
     public void SignalDanger()
@@ -70,5 +81,23 @@ public class UI : MonoBehaviour
     public void SetXToJason(bool state)
     {
         XToJason.SetActive(state);
+    }
+
+    public bool isDisplayingImage()
+    {
+        return ShowWindow.activeInHierarchy;
+    }
+
+    public void ShowImage(Texture2D image, string desc = null)
+    {
+        ShowWindow.SetActive(true);
+        ShowImageSpot.texture = image;
+        if (desc != null)
+            Description.text = desc;
+    }
+
+    public void CloseImage()
+    {
+        ShowWindow.SetActive(false);
     }
 }
