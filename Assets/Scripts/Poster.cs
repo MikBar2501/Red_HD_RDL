@@ -9,6 +9,7 @@ public class Poster : Interactable
 
     public override void Interact()
     {
+        Debug.Log("here");
         if (image != null && UI._UI.isDisplayingImage() == false)
             UI._UI.ShowImage(image, desc);
     }

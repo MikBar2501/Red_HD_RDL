@@ -13,7 +13,7 @@ public class InteractionHandler : MonoBehaviour
     public Animator animator;
     public float Range = 5;
     public List<Interactable> interactables;
-    Interactable closest;
+    public Interactable closest;
 
     void Awake()
     {
@@ -61,20 +61,17 @@ public class InteractionHandler : MonoBehaviour
         
         if(Input.GetButtonDown("Interaction") && closest != null)
         {
+            interactables[choosen].Interact();
+            if (interactables[choosen].numer != -1)
+                stats.interacted[interactables[choosen].numer] = true;
             if (interactables[choosen].CanGather())
             {
                 animator.SetTrigger("Gather");
                 GatherItem(interactables[choosen] as Consumable);
-                interactables[choosen].Interact();
-                if (interactables[choosen].numer != -1)
-                    stats.interacted[interactables[choosen].numer] = true;
             }
             if (interactables[choosen].CanTalkWith())
             {
                 animator.SetTrigger("Contact");
-                interactables[choosen].Interact();
-                if (interactables[choosen].numer != -1)
-                    stats.interacted[interactables[choosen].numer] = true;
             }
         }
     }
