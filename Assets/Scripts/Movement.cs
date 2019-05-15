@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     public Stats stats;
 
-    private bool onSlope = false;
+    private float slopeMult = 1f;
     private Rigidbody objectsRigidbody;
     private Vector3 movementDirection;
     private int layerMask = 0 << 0;
@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         objectsRigidbody = GetComponent<Rigidbody>();
-        characterHeight = GetComponent<CapsuleCollider>().height/2;
+        characterHeight = GetComponent<CapsuleCollider>().height;
         animator = GetComponent<Animator>();
 
     }
@@ -62,10 +62,11 @@ public class Movement : MonoBehaviour
             animator.SetBool("IsSprinting", false);
         }
 
-        if (!onSlope && movementDirection.magnitude > 0)
+        //if (!onSlope && movementDirection.magnitude > 0)
+        if (movementDirection.magnitude > 0)
         {
             animator.SetBool("IsMoving", true);
-            movement = movementDirection * actualSpeed * Time.deltaTime;
+            movement = movementDirection * actualSpeed * slopeMult * Time.deltaTime;
         }
         else
             animator.SetBool("IsMoving", false);
@@ -74,10 +75,10 @@ public class Movement : MonoBehaviour
         objectsRigidbody.MovePosition(objectsRigidbody.position + movement);
     }
 
-    
+
     private void Turn()
-    { 
-        if(movementDirection.magnitude > 0)
+    {
+        if (movementDirection.magnitude > 0)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movementDirection), stats.rotationSpeed * Time.deltaTime);
 
     }
@@ -86,16 +87,22 @@ public class Movement : MonoBehaviour
     {
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position - new Vector3(0, characterHeight, 0), transform.TransformDirection(Vector3.down), out hit, 1f, layerMask))
+        //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1f, Color.yellow);
+
+        if (Physics.Raycast(transform.position , transform.TransformDirection(Vector3.down), out hit, 1f, layerMask))
         {
             Vector3 hitNormal = hit.normal;
             float angle = Vector3.Angle(Vector3.down, hitNormal);
-
-          //  Debug.DrawRay(transform.position - new Vector3(0, characterHeight, 0), transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow);
-            if (angle < 145)
-                onSlope = true;
+            Debug.DrawRay(transform.position , transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
+            if (hit.transform.name.Contains("Terrain") && angle < 140)
+            {
+                //print("onSlope");
+                slopeMult = Mathf.Clamp(2 / (angle - 135), 0, 1);
+            }
             else
-                onSlope = false;
+            {
+                slopeMult = 1f;
+            }
         }
     }
 
