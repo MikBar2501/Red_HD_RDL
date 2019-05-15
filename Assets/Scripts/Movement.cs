@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof (AudioSource))]
 public class Movement : MonoBehaviour
 {
     public Stats stats;
@@ -15,13 +16,26 @@ public class Movement : MonoBehaviour
     public static bool CanMove = true;
 
 
+    [SerializeField] private AudioClip[] m_FootstepSounds;
+    [SerializeField] private float m_StepInterval;
+    [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
+    private AudioSource m_AudioSource;
+    private float m_NextStep;
+    private float m_StepCycle;
+
+
+    private void Start() {
+        m_AudioSource = GetComponent<AudioSource>();
+        m_StepCycle = 0f;
+        m_NextStep = m_StepCycle/2f;
+    }
+
     private void Awake()
     {
         CanMove = true;
         objectsRigidbody = GetComponent<Rigidbody>();
         characterHeight = GetComponent<CapsuleCollider>().height;
         animator = GetComponent<Animator>();
-
     }
     private void OnEnable()
     {
@@ -56,11 +70,13 @@ public class Movement : MonoBehaviour
     {
         float actualSpeed = stats.movingSpeed;
         Vector3 movement = new Vector3();
+        bool walk;
 
         if (Input.GetButton("Sprint"))
         {
             actualSpeed *= stats.sprintMultiplayer;
             animator.SetBool("IsSprinting", true);
+            walk = false;
         }
         else
         {
@@ -72,6 +88,8 @@ public class Movement : MonoBehaviour
         {
             animator.SetBool("IsMoving", true);
             movement = movementDirection * actualSpeed * slopeMult * Time.deltaTime;
+            walk = true;
+            ProgressStepCycle(actualSpeed,walk);
         }
         else
             animator.SetBool("IsMoving", false);
@@ -110,5 +128,31 @@ public class Movement : MonoBehaviour
             }
         }
     }
+
+    private void PlayFootStepAudio()
+    {
+        int n = Random.Range(1, m_FootstepSounds.Length);
+        m_AudioSource.clip = m_FootstepSounds[n];
+        m_AudioSource.PlayOneShot(m_AudioSource.clip);
+        m_FootstepSounds[n] = m_FootstepSounds[0];
+        m_FootstepSounds[0] = m_AudioSource.clip;
+    }
+
+    private void ProgressStepCycle(float speed, bool walk)
+        {
+            if (GetComponent<Rigidbody>().velocity.sqrMagnitude > 0)
+            {
+                m_StepCycle += (GetComponent<Rigidbody>().velocity.magnitude + (speed*(walk ? m_RunstepLenghten : 1f ))) * Time.fixedDeltaTime;
+            }
+
+            if (!(m_StepCycle > m_NextStep))
+            {
+                return;
+            }
+
+            m_NextStep = m_StepCycle + m_StepInterval;
+
+            PlayFootStepAudio();
+        }
 
 }
