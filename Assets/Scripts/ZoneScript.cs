@@ -9,10 +9,15 @@ public class ZoneScript : MonoBehaviour
     float distance;
     Collider player;
     float radius;
+
+    public AudioClip mainMotive; 
+    public AudioSource audioSource; 
     
     void Start()
     {
         radius = GetComponent<SphereCollider>().radius;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.maxDistance = radius;
     }
 
     // Update is called once per frame
