@@ -12,10 +12,12 @@ public class Movement : MonoBehaviour
     private int layerMask = 0 << 0;
     private float characterHeight;
     private Animator animator;
+    public static bool CanMove = true;
 
 
     private void Awake()
     {
+        CanMove = true;
         objectsRigidbody = GetComponent<Rigidbody>();
         characterHeight = GetComponent<CapsuleCollider>().height/2;
         animator = GetComponent<Animator>();
@@ -39,7 +41,10 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (CanMove)
+            movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+        else
+            movementDirection = Vector3.zero;
     }
     private void FixedUpdate()
     {

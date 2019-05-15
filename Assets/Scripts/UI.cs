@@ -22,11 +22,14 @@ public class UI : MonoBehaviour
     public GameObject ShowWindow;
     public RawImage ShowImageSpot;
     public Text Description;
+
+    bool FramePassed = true;
     
     bool inZone;
 
     void Awake()
     {
+        FramePassed = true;
         CloseImage();
         _UI = this;
         SetXToJason(false);
@@ -60,9 +63,14 @@ public class UI : MonoBehaviour
 
         if(isDisplayingImage())
         {
-            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            Debug.Log("here");
+            if (Input.GetButtonDown("Interaction") && FramePassed)
                 CloseImage();
         }
+
+
+
+        FramePassed = true;
     }
 
     public void SignalDanger()
@@ -89,14 +97,17 @@ public class UI : MonoBehaviour
 
     public void ShowImage(Texture2D image, string desc = null)
     {
+        FramePassed = false;
         ShowWindow.SetActive(true);
         ShowImageSpot.texture = image;
         if (desc != null)
             Description.text = desc;
+        Movement.CanMove = false;
     }
 
     public void CloseImage()
     {
+        Movement.CanMove = true;
         ShowWindow.SetActive(false);
     }
 }
