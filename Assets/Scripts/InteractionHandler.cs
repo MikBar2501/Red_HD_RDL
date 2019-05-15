@@ -5,22 +5,27 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public class InteractionHandler : MonoBehaviour
 {
     public static InteractionHandler _object;
     public float Range = 5;
     public List<Interactable> interactables;
 
+    //inventory
+    List<string> items;
+
     void Awake()
     {
+        items = new List<string>();
         _object = this;
         interactables = new List<Interactable>();
         GetComponent<SphereCollider>().radius = Range;
     }
-    
+
     void Update()
     {
-        if(Input.GetButtonDown("Interaction"))
+        if (Input.GetButtonDown("Interaction"))
         {
             if (interactables.Count == 0)
                 return;
@@ -39,15 +44,23 @@ public class InteractionHandler : MonoBehaviour
                     choosen = i;
                 }
             }
-            if(choosen != -1)
+            if (choosen != -1)
             {
                 interactables[choosen].Interact();
                 if (interactables[choosen].CanGather())
-                        GetComponent<Animator>().SetTrigger("Gather");
+                {
+                    GetComponent<Animator>().SetTrigger("Gather");
+                    GatherItem(interactables[choosen] as Consumable);
+                }
                 if (interactables[choosen].CanTalkWith())
                     GetComponent<Animator>().SetTrigger("Contact");
             }
         }
+    }
+
+    void GatherItem(Consumable consumable)
+    {
+        GetComponentInParent<PlayerRadiationSettings>().AddResistance(consumable.shield);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,6 +78,6 @@ public class InteractionHandler : MonoBehaviour
         if (I != null)
             interactables.Remove(I);
     }
-    
+
 
 }
