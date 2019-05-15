@@ -55,10 +55,15 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CanMove)
-            movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+        if (CanMove && !stats.isPaused)
+            movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         else
             movementDirection = Vector3.zero;
+
+        if (!stats.isPaused)
+            objectsRigidbody.isKinematic = false;
+        else
+            objectsRigidbody.isKinematic = true;
     }
     private void FixedUpdate()
     {
@@ -131,11 +136,15 @@ public class Movement : MonoBehaviour
 
     private void PlayFootStepAudio()
     {
-        int n = Random.Range(1, m_FootstepSounds.Length);
-        m_AudioSource.clip = m_FootstepSounds[n];
-        m_AudioSource.PlayOneShot(m_AudioSource.clip);
-        m_FootstepSounds[n] = m_FootstepSounds[0];
-        m_FootstepSounds[0] = m_AudioSource.clip;
+        if(m_FootstepSounds.Length > 1)
+        {
+            int n = Random.Range(1, m_FootstepSounds.Length);
+            m_AudioSource.clip = m_FootstepSounds[n];
+            m_AudioSource.volume = stats.Sounds;
+            m_AudioSource.PlayOneShot(m_AudioSource.clip);
+            m_FootstepSounds[n] = m_FootstepSounds[0];
+            m_FootstepSounds[0] = m_AudioSource.clip;
+        }
     }
 
     private void ProgressStepCycle(float speed, bool walk)

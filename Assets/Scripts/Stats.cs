@@ -18,4 +18,9 @@ public class Stats : ScriptableObject
 
     [Space(25)]
     public bool[] interacted;
+
+    [Space(25)]
+    public bool isPaused;
+    public float Music;
+    public float Sounds;
 }
