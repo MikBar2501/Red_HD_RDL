@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
+    public static UI _UI;
     public RawImage image;
     public PlayerRadiationSettings PlayerRadiation;
-    public float basicWidth;
+    float basicWidth;
 
     public RawImage SafeButton;
     public RawImage DangerButton;
 
+    public GameObject XToJason;
     public Texture2D safeOff;
     public Texture2D safeOn;
     public Texture2D dangerOff;
@@ -20,7 +22,11 @@ public class UI : MonoBehaviour
     public PlayerRadiationSettings player;
     bool inZone;
 
-  //  public RectTransform DialogWindow;
+    void Awake()
+    {
+        _UI = this;
+        SetXToJason(false);
+    }
 
     void Start()
     {
@@ -59,5 +65,10 @@ public class UI : MonoBehaviour
     {
         SafeButton.texture = safeOn;
         DangerButton.texture = dangerOff;
+    }
+
+    public void SetXToJason(bool state)
+    {
+        XToJason.SetActive(state);
     }
 }
