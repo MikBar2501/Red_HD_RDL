@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class InteractionHandler : MonoBehaviour
 {
+    public Animator animator;
     public static InteractionHandler _object;
     public float Range = 5;
     public List<Interactable> interactables;
@@ -49,11 +50,11 @@ public class InteractionHandler : MonoBehaviour
                 interactables[choosen].Interact();
                 if (interactables[choosen].CanGather())
                 {
-                    GetComponent<Animator>().SetTrigger("Gather");
+                    animator.SetTrigger("Gather");
                     GatherItem(interactables[choosen] as Consumable);
                 }
                 if (interactables[choosen].CanTalkWith())
-                    GetComponent<Animator>().SetTrigger("Contact");
+                    animator.SetTrigger("Contact");
             }
         }
     }

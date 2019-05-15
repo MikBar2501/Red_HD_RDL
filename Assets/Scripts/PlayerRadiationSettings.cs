@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerRadiationSettings : MonoBehaviour
 {
@@ -69,6 +70,8 @@ public class PlayerRadiationSettings : MonoBehaviour
     }
 
     public void Death() {
+        GetComponent<Animator>().SetTrigger("Die");
+        Fader.Fade(3f, 2f, true, () => { SceneManager.LoadScene("BaseScene"); });
         Debug.Log("You died, bitch");
     }
 
