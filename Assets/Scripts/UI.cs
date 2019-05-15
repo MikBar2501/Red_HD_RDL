@@ -63,7 +63,6 @@ public class UI : MonoBehaviour
 
         if(isDisplayingImage())
         {
-            Debug.Log("here");
             if (Input.GetButtonDown("Interaction") && FramePassed)
                 CloseImage();
         }

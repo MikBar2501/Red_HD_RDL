@@ -8,19 +8,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class InteractionHandler : MonoBehaviour
 {
-    public Animator animator;
     public static InteractionHandler _object;
+    public Stats stats;
+    public Animator animator;
     public float Range = 5;
     public List<Interactable> interactables;
     Interactable closest;
 
-    //inventory
-    List<string> items;
-
     void Awake()
     {
         closest = null;
-        items = new List<string>();
         _object = this;
         interactables = new List<Interactable>();
         GetComponent<SphereCollider>().radius = Range;
@@ -38,11 +35,14 @@ public class InteractionHandler : MonoBehaviour
         float dist;
         for (int i = 0; i < interactables.Count; i++)
         {
-            dist = Vector3.Distance(transform.position, interactables[i].transform.position);
-            if (dist < min)
+            if(interactables[i].CanInteract())
             {
-                min = dist;
-                choosen = i;
+                dist = Vector3.Distance(transform.position, interactables[i].transform.position);
+                if (dist < min)
+                {
+                    min = dist;
+                    choosen = i;
+                }
             }
         }
         if (choosen != -1)
@@ -61,14 +61,21 @@ public class InteractionHandler : MonoBehaviour
         
         if(Input.GetButtonDown("Interaction") && closest != null)
         {
-            interactables[choosen].Interact();
             if (interactables[choosen].CanGather())
             {
                 animator.SetTrigger("Gather");
                 GatherItem(interactables[choosen] as Consumable);
+                interactables[choosen].Interact();
+                if (interactables[choosen].numer != -1)
+                    stats.interacted[interactables[choosen].numer] = true;
             }
             if (interactables[choosen].CanTalkWith())
+            {
                 animator.SetTrigger("Contact");
+                interactables[choosen].Interact();
+                if (interactables[choosen].numer != -1)
+                    stats.interacted[interactables[choosen].numer] = true;
+            }
         }
     }
 

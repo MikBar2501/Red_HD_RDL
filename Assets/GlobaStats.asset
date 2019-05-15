@@ -18,3 +18,4 @@ MonoBehaviour:
   cameraDampTime: 0.2
   cameraScreenEdgeBuffer: 4
   cameraMinSize: 6.5
+  interacted: 00010100000000000000000000000000

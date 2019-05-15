@@ -16,4 +16,6 @@ public class Stats : ScriptableObject
     public float cameraScreenEdgeBuffer = 4f;           // Space between the top/bottom most target and the screen edge.
     public float cameraMinSize = 6.5f;                  // The smallest orthographic size the camera can be.
 
+    [Space(25)]
+    public bool[] interacted;
 }
