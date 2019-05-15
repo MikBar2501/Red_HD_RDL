@@ -22,8 +22,7 @@ public class UI : MonoBehaviour
     public GameObject ShowWindow;
     public RawImage ShowImageSpot;
     public Text Description;
-
-    public PlayerRadiationSettings player;
+    
     bool inZone;
 
     void Awake()
@@ -37,8 +36,8 @@ public class UI : MonoBehaviour
     {
         Rect rect = image.rectTransform.rect;
         basicWidth = rect.width;
-        inZone = player.inZone;
-        if (player.inZone)
+        inZone = PlayerRadiation.inZone;
+        if (PlayerRadiation.inZone)
             SignalDanger();
         else
             SignalSafety();
@@ -50,10 +49,10 @@ public class UI : MonoBehaviour
         rect.width = basicWidth * PlayerRadiation.shieldValue / PlayerRadiation.maxShieldValue;
         image.rectTransform.sizeDelta = new Vector2(rect.width, image.rectTransform.sizeDelta.y);
 
-        if(inZone != player.inZone)
+        if(inZone != PlayerRadiation.inZone)
         {
-            inZone = player.inZone;
-            if (player.inZone)
+            inZone = PlayerRadiation.inZone;
+            if (PlayerRadiation.inZone)
                 SignalDanger();
             else
                 SignalSafety();
