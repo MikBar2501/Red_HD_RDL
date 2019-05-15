@@ -14,8 +14,13 @@ public class DialoguesDisplayer : MonoBehaviour
     //  int currentPart;
  //   string[] parts; //parts of dialog
 
-    public static void Display(TextAsset text, string personName, Transform person)
+    public static void Display(Vector3 pos, TextAsset text, string personName, Transform person)
     {
+        _object.window.transform.position = pos + new Vector3(0, 2, 0);
+        _object.window.transform.LookAt(Camera.main.transform.position);
+
+        _object.window.transform.Rotate(Vector3.right, 180, Space.Self);
+        _object.window.transform.Rotate(Vector3.forward, 180, Space.Self);
         _object.window.SetActive(true);
         _object.personName.text = personName;
         _object.person = person;
@@ -51,6 +56,7 @@ public class DialoguesDisplayer : MonoBehaviour
         {
             if(person == null)
             {
+                Debug.Log("no onwer, close");
                 window.SetActive(false);
                 return;
             }
@@ -59,6 +65,10 @@ public class DialoguesDisplayer : MonoBehaviour
                 Close();
                 return;
             }
+
+       //     window.transform.LookAt(Camera.main.transform.position);
+      //      window.transform.Rotate(Vector3.right, 180, Space.Self);
+       //     window.transform.Rotate(Vector3.forward, 180, Space.Self);
         }
     }
 }

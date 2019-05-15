@@ -15,7 +15,7 @@ public class Npc : Interactable
         if (DialoguesDisplayer.isOpen() && DialoguesDisplayer.OpenedBy() == NpcName)
             DialoguesDisplayer.Close();
         else
-            DialoguesDisplayer.Display(dialog, NpcName, transform);
+            DialoguesDisplayer.Display(transform.position, dialog, NpcName, transform);
     }
 
     public override bool CanTalkWith()
