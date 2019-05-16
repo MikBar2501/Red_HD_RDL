@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     private float characterHeight;
     private Animator animator;
     public static bool CanMove = true;
+    public float stepVolume = 0.4f;
 
 
     [SerializeField] private AudioClip[] m_FootstepSounds;
@@ -163,7 +164,7 @@ public class Movement : MonoBehaviour
         {
             int n = Random.Range(1, m_FootstepSounds.Length);
             m_AudioSource.clip = m_FootstepSounds[n];
-            m_AudioSource.volume = stats.Sounds;
+            m_AudioSource.volume = 0.4f * stats.Sounds;
             m_AudioSource.PlayOneShot(m_AudioSource.clip);
             m_FootstepSounds[n] = m_FootstepSounds[0];
             m_FootstepSounds[0] = m_AudioSource.clip;
@@ -174,7 +175,7 @@ public class Movement : MonoBehaviour
         {
             if (GetComponent<Rigidbody>().velocity.sqrMagnitude > 0)
             {
-                m_StepCycle += (GetComponent<Rigidbody>().velocity.magnitude + (speed*(walk ? m_RunstepLenghten : 1f ))) * Time.fixedDeltaTime;
+                m_StepCycle += (GetComponent<Rigidbody>().velocity.magnitude + (speed*(walk ? m_RunstepLenghten : 0.75f ))) * Time.fixedDeltaTime;
             }
 
             if (!(m_StepCycle > m_NextStep))

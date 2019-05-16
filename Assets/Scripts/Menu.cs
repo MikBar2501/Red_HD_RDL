@@ -8,23 +8,25 @@ public class Menu : MonoBehaviour
 {
     public Stats Globalstats;
     public GameObject MainWindow;
-    public GameObject OptionWindow;
+    //public GameObject OptionWindow;
     public GameObject CreditWindow;
     public GameObject Cover;
 
-    public Slider musicSlider;
-    public Slider soundSlider;
+    public Slider loading;
+    public GameObject loadingScreen;
 
     public void Play()
     {
-        SceneManager.LoadScene("BaseScene");
+        loadingScreen.SetActive(true);
+        //SceneManager.LoadScene("BaseScene");
+        LoadLevel("BaseScene");
     }
 
-    public void Options()
+    /* public void Options()
     {
         OptionWindow.SetActive(true);
         MainWindow.SetActive(false);
-    }
+    }*/
 
     public void Credits()
     {
@@ -33,7 +35,7 @@ public class Menu : MonoBehaviour
 
     public void ToMain()
     {
-        OptionWindow.SetActive(false);
+        //OptionWindow.SetActive(false);
         MainWindow.SetActive(true);
     }
 
@@ -42,7 +44,7 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetVolumeSounds(Slider slider)
+    /* public void SetVolumeSounds(Slider slider)
     {
         Globalstats.Sounds = slider.value;
     }
@@ -50,18 +52,17 @@ public class Menu : MonoBehaviour
     public void SetVolumeMusic(Slider slider)
     {
         Globalstats.Music = slider.value;
-    }
+    }*/
 
     void Start()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        musicSlider.value = Globalstats.Music;
-        soundSlider.value = Globalstats.Sounds;
-        OptionWindow.SetActive(false);
+        //OptionWindow.SetActive(false);
         MainWindow.SetActive(false);
         Cover.SetActive(true);
         CreditWindow.SetActive(false);
+        loadingScreen.SetActive(false);
     }
 
 
@@ -74,4 +75,18 @@ public class Menu : MonoBehaviour
                 MainWindow.SetActive(true);
             }
     }
+
+    public void LoadLevel(string sceneName) {
+        StartCoroutine(LoadAsynchronous(sceneName));
+    }
+    IEnumerator LoadAsynchronous(string sceneName) {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        while (! operation.isDone) {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            loading.value = progress;
+            Debug.Log("Loading progress: " + (progress * 100) + "%");
+            yield return null;
+        }
+    }
+
 }
