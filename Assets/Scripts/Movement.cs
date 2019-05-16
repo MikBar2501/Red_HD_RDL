@@ -56,7 +56,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         if (CanMove)
-            movementDirection = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal")).normalized;
+            movementDirection = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal"));
         else
             movementDirection = Vector3.zero;
     }
