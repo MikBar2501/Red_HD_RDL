@@ -26,9 +26,6 @@ public class CameraMovement : MonoBehaviour
     {
         // Move the camera towards a desired position.
         Move();
-
-        // Change the size of the camera based.
-        Zoom();
     }
 
 
@@ -80,62 +77,6 @@ public class CameraMovement : MonoBehaviour
     }
 
 
-    private void Zoom()
-    {
-        // Find the required size based on the desired position and smoothly transition to that size.
-        float requiredSize = FindRequiredSize() * 0.9f;
-        m_Camera.orthographicSize = Mathf.SmoothDamp(m_Camera.orthographicSize, requiredSize, ref m_ZoomSpeed, stats.cameraDampTime);
-    }
 
 
-    private float FindRequiredSize()
-    {
-        // Find the position the camera rig is moving towards in its local space.
-        Vector3 desiredLocalPos = transform.InverseTransformPoint(m_DesiredPosition);
-
-        // Start the camera's size calculation at zero.
-        float size = 0f;
-
-        // Go through all the targets...
-        for (int i = 0; i < m_Targets.Length; i++)
-        {
-            // ... and if they aren't active continue on to the next target.
-            if (!m_Targets[i].gameObject.activeSelf)
-                continue;
-
-            // Otherwise, find the position of the target in the camera's local space.
-            Vector3 targetLocalPos = transform.InverseTransformPoint(m_Targets[i].position);
-
-            // Find the position of the target from the desired position of the camera's local space.
-            Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
-
-            // Choose the largest out of the current size and the distance of the tank 'up' or 'down' from the camera.
-            size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.y));
-
-            // Choose the largest out of the current size and the calculated size based on the tank being to the left or right of the camera.
-            size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x) / m_Camera.aspect);
-        }
-
-
-        // Add the edge buffer to the size.
-        size += stats.cameraScreenEdgeBuffer;
-
-        // Make sure the camera's size isn't below the minimum.
-        size = Mathf.Max(size, stats.cameraMinSize);
-
-        return size;
-    }
-
-
-    public void SetStartPositionAndSize()
-    {
-        // Find the desired position.
-        FindAveragePosition();
-
-        // Set the camera's position to the desired position without damping.
-        transform.position = m_DesiredPosition;
-
-        // Find and set the required size of the camera.
-        m_Camera.orthographicSize = FindRequiredSize();
-    }
 }

@@ -58,7 +58,7 @@ public class Movement : MonoBehaviour
     {
 
         if (CanMove)
-            movementDirection = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal")).normalized;
+            movementDirection = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal"));
 
         if (CanMove && !stats.isPaused)
         {
@@ -66,7 +66,6 @@ public class Movement : MonoBehaviour
             if (movementDirection.magnitude > 1)
                 movementDirection.Normalize();
         }
-
         else
             movementDirection = Vector3.zero;
 
@@ -141,10 +140,10 @@ public class Movement : MonoBehaviour
             Vector3 hitNormal = hit.normal;
             float angle = Vector3.Angle(Vector3.down, hitNormal);
             Debug.DrawRay(transform.position , transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
-            if (hit.transform.name.Contains("Terrain") && angle < 140)
+            if (hit.transform.name.Contains("Terrain") && angle < 155)
             {
                 //print("onSlope");
-                slopeMult = Mathf.Clamp(2 / (angle - 135), 0, 1);
+                slopeMult = Mathf.Clamp(2 / (angle - 150), 0, 1);
             }
             else
             {
