@@ -55,11 +55,26 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (CanMove)
             movementDirection = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal")).normalized;
+
+        if (CanMove && !stats.isPaused)
+        {
+            movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            if (movementDirection.magnitude > 1)
+                movementDirection.Normalize();
+        }
+
         else
             movementDirection = Vector3.zero;
+
+        if (!stats.isPaused)
+            objectsRigidbody.isKinematic = false;
+        else
+            objectsRigidbody.isKinematic = true;
     }
+
     private void FixedUpdate()
     {
         Move();
@@ -68,6 +83,18 @@ public class Movement : MonoBehaviour
     }
     private void Move()
     {
+        animator.SetFloat("RunSpeed", movementDirection.magnitude / 1);
+        if (movementDirection.magnitude < 0.39)
+        {
+            movementDirection = movementDirection.normalized * 0.39f;
+            animator.SetFloat("RunSpeed", 0.39f);
+        }
+
+
+
+        Debug.Log("basic = " + movementDirection.magnitude / 1);
+        Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
+
         float actualSpeed = stats.movingSpeed;
         Vector3 movement = new Vector3();
         bool walk;
@@ -88,6 +115,7 @@ public class Movement : MonoBehaviour
         {
             animator.SetBool("IsMoving", true);
             movement = movementDirection * actualSpeed * slopeMult * Time.deltaTime;
+            
             walk = true;
             ProgressStepCycle(actualSpeed,walk);
         }
@@ -131,11 +159,15 @@ public class Movement : MonoBehaviour
 
     private void PlayFootStepAudio()
     {
-        int n = Random.Range(1, m_FootstepSounds.Length);
-        m_AudioSource.clip = m_FootstepSounds[n];
-        m_AudioSource.PlayOneShot(m_AudioSource.clip);
-        m_FootstepSounds[n] = m_FootstepSounds[0];
-        m_FootstepSounds[0] = m_AudioSource.clip;
+        if(m_FootstepSounds.Length > 1)
+        {
+            int n = Random.Range(1, m_FootstepSounds.Length);
+            m_AudioSource.clip = m_FootstepSounds[n];
+            m_AudioSource.volume = stats.Sounds;
+            m_AudioSource.PlayOneShot(m_AudioSource.clip);
+            m_FootstepSounds[n] = m_FootstepSounds[0];
+            m_FootstepSounds[0] = m_AudioSource.clip;
+        }
     }
 
     private void ProgressStepCycle(float speed, bool walk)

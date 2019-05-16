@@ -19,3 +19,6 @@ MonoBehaviour:
   cameraScreenEdgeBuffer: 4
   cameraMinSize: 6.5
   interacted: 00010100000000000000000000000000
+  isPaused: 0
+  Music: 0
+  Sounds: 1

@@ -57,8 +57,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a215f4f1a4ed64448a3b0bac8e54e0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  animator: {fileID: 0}
   Range: 5
   interactables: []
+  closest: {fileID: 0}
 --- !u!1 &6890976485083899393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1788,6 +1791,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 404a808bf5ac93a4ca883c2746b3db90, type: 2}
+  m_FootstepSounds:
+  - {fileID: 8300000, guid: 39891295f8ea42f47999a2d23aae86dd, type: 3}
+  - {fileID: 8300000, guid: 39891295f8ea42f47999a2d23aae86dd, type: 3}
+  m_StepInterval: 0
+  m_RunstepLenghten: 0
 --- !u!114 &1903776511
 MonoBehaviour:
   m_ObjectHideFlags: 0
