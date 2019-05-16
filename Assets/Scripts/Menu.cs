@@ -9,6 +9,8 @@ public class Menu : MonoBehaviour
     public Stats Globalstats;
     public GameObject MainWindow;
     public GameObject OptionWindow;
+    public GameObject CreditWindow;
+    public GameObject Cover;
 
     public Slider musicSlider;
     public Slider soundSlider;
@@ -22,6 +24,11 @@ public class Menu : MonoBehaviour
     {
         OptionWindow.SetActive(true);
         MainWindow.SetActive(false);
+    }
+
+    public void Credits()
+    {
+
     }
 
     public void ToMain()
@@ -47,15 +54,24 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         musicSlider.value = Globalstats.Music;
         soundSlider.value = Globalstats.Sounds;
         OptionWindow.SetActive(false);
-        MainWindow.SetActive(true);
+        MainWindow.SetActive(false);
+        Cover.SetActive(true);
+        CreditWindow.SetActive(false);
     }
 
 
     void Update()
     {
-        
+        if (Input.anyKeyDown)
+            if (Cover.activeSelf)
+            {
+                Cover.SetActive(false);
+                MainWindow.SetActive(true);
+            }
     }
 }
