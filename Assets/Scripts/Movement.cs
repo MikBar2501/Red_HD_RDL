@@ -143,7 +143,8 @@ public class Movement : MonoBehaviour
             if (hit.transform.name.Contains("Terrain") && angle < 155)
             {
                 //print("onSlope");
-                slopeMult = Mathf.Clamp(2 / (angle - 150), 0, 1);
+                slopeMult = Mathf.Clamp(2 / (angle - 150), 0.1f, 1);
+                print(slopeMult);
             }
             else
             {
