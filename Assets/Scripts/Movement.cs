@@ -91,11 +91,6 @@ public class Movement : MonoBehaviour
             animator.SetFloat("RunSpeed", 0.39f);
         }
 
-
-
-        Debug.Log("basic = " + movementDirection.magnitude / 1);
-        Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
-
         float actualSpeed = stats.movingSpeed;
         Vector3 movement = new Vector3();
         bool walk;

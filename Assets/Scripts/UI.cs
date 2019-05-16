@@ -24,6 +24,7 @@ public class UI : MonoBehaviour
     public GameObject ShowWindow;
     public RawImage ShowImageSpot;
     public Text Description;
+    public Text NumberOfBars;
 
     public GameObject HUD;
     public GameObject MenuWindow;
@@ -36,6 +37,8 @@ public class UI : MonoBehaviour
 
     void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         GlobalStats.isPaused = false;
         Debug.Log(GlobalStats.isPaused);
         FramePassed = true;
@@ -71,6 +74,7 @@ public class UI : MonoBehaviour
         }
 
 
+        NumberOfBars.text = PlayerRadiation.shieldCount.ToString();
         Rect rect = image.rectTransform.rect;
         rect.width = basicWidth * PlayerRadiation.shieldValue / PlayerRadiation.maxShieldValue;
         image.rectTransform.sizeDelta = new Vector2(rect.width, image.rectTransform.sizeDelta.y);
@@ -143,6 +147,8 @@ public class UI : MonoBehaviour
 
     public void DisplayMenu()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         GlobalStats.isPaused = true;
         MenuWindow.SetActive(true);
         HUD.SetActive(false);
@@ -150,10 +156,11 @@ public class UI : MonoBehaviour
 
     public void CloseMenu()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         GlobalStats.isPaused = false;
         MenuWindow.SetActive(false);
         HUD.SetActive(true);
-
     }
 
     public void SetMusic()
