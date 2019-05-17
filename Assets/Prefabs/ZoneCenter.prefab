@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inZone: 0
-  radiationStrengthMax: 0
+  radiationStrengthMax: 10
   mainMotive: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!82 &209164841592890704
