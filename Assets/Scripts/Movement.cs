@@ -140,11 +140,13 @@ public class Movement : MonoBehaviour
             Vector3 hitNormal = hit.normal;
             float angle = Vector3.Angle(Vector3.down, hitNormal);
             Debug.DrawRay(transform.position , transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
-            if (hit.transform.name.Contains("Terrain") && angle < 155)
+            print(" ang " + angle);
+
+            if (hit.transform.name.Contains("Terrain") && angle < 140)
             {
                 //print("onSlope");
-                slopeMult = Mathf.Clamp(2 / (angle - 150), 0.1f, 1);
-                //print(slopeMult);
+                slopeMult = Mathf.Clamp(2 / (angle - 135), 0.1f, 1);
+                print(slopeMult + " ang " + angle);
             }
             else
             {
