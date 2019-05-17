@@ -62,7 +62,7 @@ public class Movement : MonoBehaviour
 
         if (CanMove && !stats.isPaused)
         {
-            movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            movementDirection = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal"));
             if (movementDirection.magnitude > 1)
                 movementDirection.Normalize();
         }
@@ -144,7 +144,7 @@ public class Movement : MonoBehaviour
             {
                 //print("onSlope");
                 slopeMult = Mathf.Clamp(2 / (angle - 150), 0.1f, 1);
-                print(slopeMult);
+                //print(slopeMult);
             }
             else
             {
