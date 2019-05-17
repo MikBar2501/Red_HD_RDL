@@ -2029,6 +2029,7 @@ GameObject:
   - component: {fileID: 2974127044762516496}
   - component: {fileID: 2974127044762516501}
   - component: {fileID: 2974127044762516498}
+  - component: {fileID: 753437705}
   m_Layer: 0
   m_Name: PlayerFurry
   m_TagString: Player
@@ -2210,7 +2211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d969d3ba91bced640bb8064326654190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldCount: 1
+  shieldCount: 0
   shieldValue: 40
   maxShieldValue: 40
   nonShieldInZoneCounter: 0
@@ -2233,13 +2234,21 @@ MonoBehaviour:
   stepVolume: 0.4
   m_FootstepSounds:
   - {fileID: 8300000, guid: 0a049bd1863c6df45a2a7a6dd13af5c5, type: 3}
-  - {fileID: 8300000, guid: 021c9e064a608644ba75ad6366cd80bf, type: 3}
   - {fileID: 8300000, guid: 8d6af43f759440c4b8eb6b6c38bd3f95, type: 3}
+  - {fileID: 8300000, guid: 9030de9b94c086c45bab14e0cb6415c5, type: 3}
   - {fileID: 8300000, guid: d28c871c072522d478a8d2edbf1fcddc, type: 3}
   - {fileID: 8300000, guid: 4336353fd77f2e246bf92431d06cec4b, type: 3}
-  - {fileID: 8300000, guid: 9030de9b94c086c45bab14e0cb6415c5, type: 3}
-  m_StepInterval: 1
-  m_RunstepLenghten: 0.84
+  - {fileID: 8300000, guid: 021c9e064a608644ba75ad6366cd80bf, type: 3}
+  m_StepInterval: 1.2
+  m_RunstepLenghten: 0.7
+--- !u!81 &753437705
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974127045334007261}
+  m_Enabled: 1
 --- !u!1 &2974127045334007263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,8 +2438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a215f4f1a4ed64448a3b0bac8e54e0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
-  animator: {fileID: 0}
+  stats: {fileID: 11400000, guid: 404a808bf5ac93a4ca883c2746b3db90, type: 2}
+  animator: {fileID: 2974127045343350303}
   Range: 5
   interactables: []
   closest: {fileID: 0}
