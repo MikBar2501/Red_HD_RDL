@@ -242,6 +242,9 @@ GameObject:
   - component: {fileID: 5186568988155778519}
   - component: {fileID: 5186568988156581367}
   - component: {fileID: 5186568988157548343}
+  - component: {fileID: 377354020636943674}
+  - component: {fileID: 3868081337429743994}
+  - component: {fileID: 6827530953299193892}
   m_Layer: 0
   m_Name: Straight Road Broken
   m_TagString: Untagged
@@ -312,6 +315,45 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &377354020636943674
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186568988155611639}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.253548, y: 0.34463596, z: 25.875}
+  m_Center: {x: 0, y: 0.17279834, z: 18.0625}
+--- !u!65 &3868081337429743994
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186568988155611639}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.530216, y: 0.34463596, z: 10.245972}
+  m_Center: {x: -1.8616657, y: 0.17279834, z: 0.12298584}
+--- !u!65 &6827530953299193892
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186568988155611639}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.8395119, y: 0.34463596, z: 5.168213}
+  m_Center: {x: 2.707018, y: 0.17279834, z: -2.4158936}
 --- !u!1 &5186568988155611643
 GameObject:
   m_ObjectHideFlags: 0

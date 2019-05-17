@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1119556011418684569}
   - component: {fileID: 1119556011422108857}
   - component: {fileID: 1119556011420978809}
+  - component: {fileID: 3413435074458353355}
   m_Layer: 0
   m_Name: Wooden Fence S4
   m_TagString: Untagged
@@ -57,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 98ade15455c2c5b469d51ba0392fb134, type: 2}
+  - {fileID: 2100000, guid: f20ca9107d2326f438307d2fdffb37ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3413435074458353355
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119556011418718393}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.29141825, y: 1.649902, z: 3.0507}
+  m_Center: {x: 0, y: 0.7852339, z: 0}
