@@ -70,6 +70,7 @@ public class PlayerRadiationSettings : MonoBehaviour
     }
 
     public void Death() {
+        isDead = true;
         GetComponent<Animator>().SetTrigger("Die");
         Fader.Fade(3f, 2f, true, () => { SceneManager.LoadScene("Menu"); });
         Movement.CanMove = false;

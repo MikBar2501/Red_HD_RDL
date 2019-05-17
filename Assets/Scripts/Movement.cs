@@ -77,8 +77,10 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
-        Turn();
+        if(!GetComponent<PlayerRadiationSettings>().isDead) {
+            Move();
+            Turn();
+        }
         checkForSlope();
     }
     private void Move()
