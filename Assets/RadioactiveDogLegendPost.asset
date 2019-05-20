@@ -64,13 +64,13 @@ MonoBehaviour:
     value: 1
   focusDistance:
     overrideState: 1
-    value: 10.31
+    value: 10.5
   aperture:
     overrideState: 1
     value: 1
   focalLength:
     overrideState: 1
-    value: 53.32
+    value: 54
   kernelSize:
     overrideState: 0
     value: 1
@@ -142,7 +142,7 @@ MonoBehaviour:
     value: 1
   externalLut:
     overrideState: 1
-    value: {fileID: 2800000, guid: 78b06834af8bc544da3da025038d9d1c, type: 3}
+    value: {fileID: 0}
     defaultState: 1
   tonemapper:
     overrideState: 0
@@ -174,19 +174,19 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: -22.62
+    value: 17
   tint:
     overrideState: 0
     value: 0
   colorFilter:
     overrideState: 1
-    value: {r: 0.66201293, g: 0.83018875, b: 0.49733004, a: 1}
+    value: {r: 0.4528302, g: 0.3287596, b: 0.2242791, a: 1}
   hueShift:
     overrideState: 1
-    value: -3.82
+    value: 0
   saturation:
     overrideState: 1
-    value: -9.25
+    value: -34
   brightness:
     overrideState: 0
     value: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
     value: 0
   contrast:
     overrideState: 1
-    value: 43.82
+    value: 35
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -1530,7 +1530,7 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.31
+    value: 0.408
   smoothness:
     overrideState: 0
     value: 0.2

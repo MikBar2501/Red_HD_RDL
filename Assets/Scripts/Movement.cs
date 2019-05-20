@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     public float stepVolume = 0.4f;
 
 
+
     [SerializeField] private AudioClip[] m_FootstepSounds;
     [SerializeField] private float m_StepInterval;
     [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
@@ -59,6 +60,7 @@ public class Movement : MonoBehaviour
 
         if (CanMove)
             movementDirection = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal"));
+            //Debug.Log("chodzi");
 
         if (CanMove && !stats.isPaused)
         {
@@ -142,7 +144,7 @@ public class Movement : MonoBehaviour
             Vector3 hitNormal = hit.normal;
             float angle = Vector3.Angle(Vector3.down, hitNormal);
             Debug.DrawRay(transform.position , transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
-            print(" ang " + angle);
+            //print(" ang " + angle);
 
             if (hit.transform.name.Contains("Terrain") && angle < 140)
             {
